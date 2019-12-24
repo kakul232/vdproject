@@ -132,8 +132,12 @@ $DocTypeArray =
 		'" . $_POST['name'] . "','" . $_POST['email'] . "','" . $_POST['dob'] . "','" . $_POST['mobile'] . "','" . $_POST['teliphone'] . "','" . $_POST['orgname'] . "','" . $_POST['regadd'] . "','" . $_POST['officeno'] . "','"
       . $_POST['acc_email'] . "','" . $_POST['type'] . "','$final_file','$file1','$file2','" . $_POST['gst'] . "','" . $_POST['cst'] . "','" . $_POST['pan'] . "','" . $_POST['vat_no'] . "','" . $_POST['feesamount'] . "','" . $_POST['gstamount'] . "','" . $_POST['netamount'] . "','" . $_POST['bankname'] . "','" . $_POST['branchname'] . "','" . $_POST['accountname'] . "','" . $_POST['accountno'] . "','" . $_POST['ifsccode'] . "','" . $_POST['package_name'] . "','" . $_POST['representive_name'] . "','" . $_POST['select1'] . "','" . $_POST['gold_purity'] . "','" . $_POST['select2'] . "','" . $_POST['name_of_certificate'] . "','" . $_POST['select3'] . "','" . $_POST['name_of_logistics_service_providers'] . "','" . $_POST['select4'] . "','" . $_POST['name_of_jewellary'] . "','" . $_POST['terms'] . "')";
     mysqli_query($conn, $query);
+	 echo ("Error description: " . mysqli_error($conn));				   
 
-    $last_id = mysqli_insert_id($conn);
+    echo $last_id = mysqli_insert_id($conn);
+					    if(!$last_id){
+						    die;
+					    }
 
                                             
 
