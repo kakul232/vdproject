@@ -82,23 +82,24 @@ $DocTypeArray =
                                       /*
     @ CODE BY KAKUL START
     */
-                                    //  echo '<pre>';
+                                      echo '<pre>';
                                     //  print_r($_FILES);
 
-                                      $total = count($_FILES['upload']['name']);
+                                      // $total = count($_FILES['upload']['name']);
                                       $fileNameArray = [];
                                       $docType = [];
                                      // $eType = $_POST['type'];
-									  $type= $_POST['type'] ;
+									                    $type= $_POST['type'] ;
                                       $docType = $DocTypeArray[$type];
 
 
                                       // Loop through each file according docType
                                       try {
+                                       
                                         foreach ($docType as $type => $value) {
-
+                                          
                                           //Get the temp file path
-                                          //echo  $tmpFilePath = $_FILES[$type]['tmp_name'];
+                                          echo  $tmpFilePath = $_FILES[$type]['tmp_name'];
 
                                           //Make sure we have a file path
                                           if ($tmpFilePath != "") {
@@ -118,61 +119,50 @@ $DocTypeArray =
                                         }
                                         //echo '<pre> <b>ARRAY TO BE STORED IN TBL_FILE</b>';
                                       //  print_r($fileNameArray);
-                                        die;
                                       } catch (Exception $e) {
                                         echo 'Message: ' . $e->getMessage();
                                       }
 
 
 
-                                      /*
+    /*
     @ CODE BY KAKUL START
     */
+    echo $query = "insert into vendor_form_data(date_enrollment,name,email,dob,mobile,teliphone,orgname,regadd,officeno,acc_email,type,file,file1,file2,gst,cst,pan,vat_no,feesamount,gstamount,netamount,bankname,branchname,accountname,accountno,ifsccode,package_name,representive_name,select1,gold_purity,select2,name_of_certificate,select3,name_of_logistics_service_providers,select4,name_of_jewellary,terms) values('$date_enrollment',
+		'" . $_POST['name'] . "','" . $_POST['email'] . "','" . $_POST['dob'] . "','" . $_POST['mobile'] . "','" . $_POST['teliphone'] . "','" . $_POST['orgname'] . "','" . $_POST['regadd'] . "','" . $_POST['officeno'] . "','"
+      . $_POST['acc_email'] . "','" . $_POST['type'] . "','$final_file','$file1','$file2','" . $_POST['gst'] . "','" . $_POST['cst'] . "','" . $_POST['pan'] . "','" . $_POST['vat_no'] . "','" . $_POST['feesamount'] . "','" . $_POST['gstamount'] . "','" . $_POST['netamount'] . "','" . $_POST['bankname'] . "','" . $_POST['branchname'] . "','" . $_POST['accountname'] . "','" . $_POST['accountno'] . "','" . $_POST['ifsccode'] . "','" . $_POST['package_name'] . "','" . $_POST['representive_name'] . "','" . $_POST['select1'] . "','" . $_POST['gold_purity'] . "','" . $_POST['select2'] . "','" . $_POST['name_of_certificate'] . "','" . $_POST['select3'] . "','" . $_POST['name_of_logistics_service_providers'] . "','" . $_POST['select4'] . "','" . $_POST['name_of_jewellary'] . "','" . $_POST['terms'] . "')";
+    mysqli_query($conn, $query);
 
-         mysqli_query($conn, "insert into vendor_form_data(date_enrollment,name,email,dob,mobile,teliphone,orgname,regadd,officeno,acc_email,type,gst,cst,pan,vat_no,
-		 feesamount,gstamount,netamount,bankname,branchname,accountname,accountno,ifsccode,package_name,representive_name,select1,gold_purity,select2,
-		 name_of_certificate,select3,name_of_logistics_service_providers,select4,name_of_jewellary,terms) values('$date_enrollment','$name',
-		 '$email','$dob','$mobile','$teliphone','$orgname',
-		 '$regadd','$officeno','$acc_email','$type','$gst','$cst','$pan','$vat_no,'$feesamount','$gstamount','$netamount','$bankname','$branchname','$accountname','$accountno',
-											  '$ifsccode','$package_name','$representive_name','$select1','$gold_purity',
-											  '$select2','$name_of_certificate','$select3','$name_of_logistics_service_providers','$select4',
-											  '$name_of_jewellary','$terms')");
+    $last_id = mysqli_insert_id($conn);
 
-
-
-
-
-                                            $last_id = mysqli_insert_id($conn);
+                                            
 
                                             if ($last_id) {
 
                                               $user_id = "VITAAZ-" . $last_id;
 
-                                              $customerid = "update vendor_form_data SET `user_id`='" . $user_id . "' where `id`='" . $last_id . "'";
-												$res1 = mysqli_query($conn, $customerid);
+                                             $customerid = "update vendor_form_data SET `user_id`='" . $user_id . "' where `id`='" . $last_id . "'";
+                                              $res1 = mysqli_query($conn, $customerid);
+
 
                                               // INSERT QUERY OF FILE 
+                                             print_r($fileNameArray);
                                               foreach($fileNameArray as $file){
-                                                 // $query= "INSERT INTO documents(user_id,type,name) VALUES('$last_id','$file['type']','$file[0]')";
-												  
-												 // $query= "INSERT INTO document(user_id,type,name) VALUES('" . $_POST['last_id'] . "','$type','$file[0]')";
-												 
-												 $query= "INSERT INTO document(user_id,name,type) VALUES('$last_id','$type','$file[0]')";
-												 $res2 = mysqli_query($conn, $query);
+                                
+                                          echo  $query= "insert INTO document(`user_id`,`type`,`name`) VALUES('$last_id','$type','$file[0]')";
+                                            $res2 = mysqli_query($conn, $query);
+                                       
                                               }
+                                    
 
-
-                                              
-											  
-											  
-                                            echo "<script>
-alert('Thank You!!! Registered succefully');
-
-</script>";
                                             }
 
 
 
+                                            echo "<script>
+alert('Thank You!!! Registered succefully');
+
+</script>"; die;
                                           }
                                         
                                       
@@ -223,7 +213,7 @@ alert('Thank You!!! Registered succefully');
       </div>
       <div class="card-body">
         <br>
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="#" method="post" enctype="multipart/form-data" novalidate>
           <!-- <div class="row">
       <div class="col">
 	    <div class="name" style="width: 250px"><b>Customer Enrollment Form No</b></div>
