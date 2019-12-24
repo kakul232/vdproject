@@ -148,8 +148,8 @@ $DocTypeArray =
                                               // INSERT QUERY OF FILE 
                                              print_r($fileNameArray);
                                               foreach($fileNameArray as $file){
-                                
-                                          echo  $query= "insert INTO document(`user_id`,`type`,`name`) VALUES('$last_id','$type','$file[0]')";
+                                		$Doc_type = $file['type'];
+                                          echo  $query= "insert INTO document(`user_id`,`type`,`name`) VALUES('$last_id','$Doc_type','$file[0]')";
                                             $res2 = mysqli_query($conn, $query);
                                        
                                               }
